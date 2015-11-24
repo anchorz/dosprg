@@ -20,15 +20,12 @@ int check_options_quit(int argc, char **argv)
 {
     int i;
 
-    for (i=1; i<argc; i++)
-    {
-        if (strcmp(argv[i],"--version")==0)
-        {
-            printf("%s",VERSION_STR);
+    for (i = 1; i < argc; i++) {
+        if (strcmp(argv[i], "--version") == 0) {
+            printf("%s", VERSION_STR);
             return true;
         }
-        if (strcmp(argv[i],"--help")==0)
-        {
+        if (strcmp(argv[i], "--help") == 0) {
             usage();
             return true;
         }
@@ -39,12 +36,10 @@ int check_options_quit(int argc, char **argv)
 int check_options_ok(int argc, char **argv)
 {
     int i;
-    
-    for (i=1; i<argc; i++)
-    {
-        if (*argv[i]!=0 && *argv[i]=='-')
-        {
-            printf("unknown option %s\n",argv[i]);
+
+    for (i = 1; i < argc; i++) {
+        if (*argv[i] != 0 && *argv[i] == '-') {
+            printf("unknown option %s\n", argv[i]);
             printf("Try '--help' for more information.\n");
             return false;
         }
@@ -58,50 +53,43 @@ static uint8_t transferbuffer[TRANSFER_SIZE];
 void crc32sum(char *filename)
 {
     int len;
-    int fh=open(filename,O_RDONLY);
-    unsigned long crc=0;
+    int fh = open(filename, O_RDONLY);
+    unsigned long crc = 0;
 
-    if (fh==-1)
-    {
-        printf("%s: No such file or directory\n",filename);
+    if (fh == -1) {
+        printf("%s: No such file or directory\n", filename);
         return;
     }
-    do
-    {
-        len=read(fh,transferbuffer,TRANSFER_SIZE);
-        if (len>0)
-        {
-            crc=crc32(crc,transferbuffer,len);
+    do {
+        len = read(fh, transferbuffer, TRANSFER_SIZE);
+        if (len > 0) {
+            crc = crc32(crc, transferbuffer, len);
         }
-    } while(len==TRANSFER_SIZE);
+    } while (len == TRANSFER_SIZE);
 
-    printf("%8lx *%s\n",crc,filename);
+    printf("%8lx *%s\n", crc, filename);
 }
 
-int main(int argc,char **argv)
+int main(int argc, char **argv)
 {
     int i;
-    
-    if (argc==1)
-    {
+
+    if (argc == 1) {
         usage();
         return 0;
     }
-    
-    if (check_options_quit(argc,argv))
-    {
+
+    if (check_options_quit(argc, argv)) {
         return 0;
     }
-    
-    if (!check_options_ok(argc,argv))
-    {
+
+    if (!check_options_ok(argc, argv)) {
         return 1;
     }
 
-    for (i=1; i<argc; i++)
-    {
+    for (i = 1; i < argc; i++) {
         crc32sum(argv[i]);
     }
-    
+
     return 0;
 }
