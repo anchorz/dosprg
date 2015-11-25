@@ -7,7 +7,7 @@ $(EXECUTABLE): $(addprefix obj/gcc/,$(OBJECTS))
 	gcc $^ -o $@ $(addprefix -l,$(LIBS))
 
 $(EXECUTABLE).com: $(addprefix obj/bcc/,$(OBJECTS))
-	ld86 -i -d -T 0x100 -D 0x0000 -H 0xf000  -L../bcc/lib/ -m -M ../bcc/lib/crt0.o -ldos $(addprefix -l,$(LIBS)) $+ -o $@ | sort -k 4 
+	ld86 -i -d -T 0x100 -D 0x0000 -H 0xf000  -L../bcc/lib/ -m -M ../bcc/lib/crt0.o -ldos $(addprefix -l,$(LIBS)) $+ -o $@ | sort -k 4 1>obj/bcc/$(EXECUTABLE).lnk 
 	
 obj/bcc/%.o: src/%.c
 # use -Md for dos applications
