@@ -1,4 +1,4 @@
-SUBPROJECTS=example1 crc32sum md2sum
+SUBPROJECTS=romfs example1 crc32sum md2sum
 
 all:
 	for dir in $(SUBPROJECTS);do pwd; cd $$dir; make ; cd ..; done

@@ -23,6 +23,7 @@ directories:
 	@mkdir -p obj/gcc
 	
 clean:
+	rm -f  h/*~
 	rm -f  src/*~
 	rm -rf obj/
 	@if [ -f $(EXECUTABLE).com ]; then rm $(EXECUTABLE).com; fi
