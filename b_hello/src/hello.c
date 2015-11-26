@@ -12,7 +12,7 @@
 
 int   s=-32768;
 char c; //located in bss section
-char *msg="V0.02"; 
+char *msg="V0.03"; 
 int  x; //located in bss section
 
 int main()
