@@ -4,7 +4,7 @@ ifeq ("$(UNAME)", "x86_64 Cygwin")
 	export PATH := $(PATH):$(shell pwd)/tools/w64
 endif
 
-SUBPROJECTS=b_hello romfs example1 crc32sum md2sum
+SUBPROJECTS=crc b_hello romfs example1 crc32sum md2sum
 
 all:
 	for dir in $(SUBPROJECTS);do pwd; cd $$dir; make || exit 2 ; cd ..; done
